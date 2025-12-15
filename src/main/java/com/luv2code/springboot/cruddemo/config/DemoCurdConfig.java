@@ -38,7 +38,7 @@ public class DemoCurdConfig {
                 .roles(MANAGER, EMPLOYEE, ADMIN)
                 .build();
 
-        return new InMemoryUserDetailsManager(john, mary, susan);
+        return new InMemoryUserDetailsManager(john, mary, susan);~~
     }
 
     @Bean
@@ -47,8 +47,9 @@ public class DemoCurdConfig {
             configurer.requestMatchers(HttpMethod.GET, "/api/employees").hasRole(EMPLOYEE)
                     .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole(EMPLOYEE)
                     .requestMatchers(HttpMethod.POST, "/api/employees").hasRole(MANAGER)
-                    .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole(MANAGER)
-                    .requestMatchers(HttpMethod.DELETE, "/api/employees").hasRole(ADMIN);
+                    .requestMatchers(HttpMethod.PUT, "/api/employees/**").hasRole(MANAGER)
+                    .requestMatchers(HttpMethod.PATCH, "/api/employees/**").hasRole(MANAGER)
+                    .requestMatchers(HttpMethod.DELETE, "/api/employees/**").hasRole(ADMIN);
         });
 
 
